@@ -38,8 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // URL per recuperare i dati dal foglio Google Sheets
   const sheetUrls = {
-    menu: 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjPKOa_J9Zdohvg0pwZc-nDRnmyWy_isYn9Bd0TQfxzOLlu6_jfCuq5UV36vrCamiLIlIMNPXCXPdfZ1Ch0mIsRNaMwc1HFOuuNVyNeQdSu4slv-VfFCIw_AWaQqrCFkW2pOiFHn2eMIoKCPRuhTYCu1oHOCnyFvjhSQLPLpGZDpXmhqifTLY1Wjq-1JTLfbpOAb2oZfPpHjlAXLO-omURcWSFNFCbCpAmqJVnNOvf7j_Xmm5KKnQ3UYoHroVDOGTOAW_TZfxgFI2vDEP0lXy_vPNGj6Q&lib=MPqJJs0z37qA-qGw-bJBepz3FZZAEnAtP',
-    eventi: 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiUbPWgIifD__FgyqLTlPSLA3igB0SrtiDE5X_J4ylJzWxog3XQlvx-hhia8O-RPXJv-dP9Iw5Y025QvPIJTdOl0F5uS_X-G8UJAyZJ2O1-tGXpcqqVwMEKkGSLJ_LqyYOOY6f9mt1WT36Q-wJn7Ka5zLUPLB8f1ECqVR-KDdfMvsuLtU_SFX2iQk7EFj8T5whYtFXTRjQBv-6IbZhvr7IT1qZi2XIWjq3GYEX7wYgzno44sRmlDRLH55-a3mtIbehB5FfGZlUIMgSPWOqYXCnDeGHzqw&lib=MCSu3KQchPQyOTU_rZHtkkT3FZZAEnAtP'
+    menu: 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhYV5Lre2RdYx97zG3_aPf4HzIBzNwcbr_2F_zu6P-vUzKog5Jai02HAzVZVLNBCcW7WX3hO8lEbXjBHmNEQzJ05dwcMcJH2ljyupvNAmjOk9WgQXdYouInHksZb-MUnlAoqxPBxd7VsaMKhKfnHpJBlwi-87zzDJCN2q8gB84Vb7RpSS1ReqwpAubamP7_G8o8okwZ4TZhgJXdbkQWYExjadKBSJhegOrj7L-aEghYtDSW6sfx1hiNch6P-gzEfOwhrTJ4gKASLUKztfSylSUCjRV39w&lib=MoyGcHZ7QfCaNWTkzEmMQPD3FZZAEnAtP',
   };
 
   let lastScrollTop = 0;
@@ -122,11 +121,17 @@ document.addEventListener("DOMContentLoaded", function () {
       ["[data-menu='Antipasti']", langData[lang].antipasti],
       ["[data-menu='Primi']", langData[lang].primi],
       ["[data-menu='Secondi']", langData[lang].secondi],
+      ["[data-menu='Contorni']", langData[lang].contorni],
       ["[data-menu='Dolci']", langData[lang].dolci],
       ["[data-menu='benvenuto']", langData[lang].benvenuto],
       ["[data-menu='scopriMenu']", langData[lang].scopriMenu],
       ["[data-menu='eventi']", langData[lang].eventi],
       ["[data-menu='filtroDieta']", langData[lang].filtroDieta],
+      ["[data-menu='Bibite']", langData[lang].bibite],
+      ["[data-menu='Acqua']", langData[lang].acqua],
+      ["[data-menu='Vino']", langData[lang].vino],
+      ["[data-menu='Birra']", langData[lang].birra],
+
     ].forEach(([selector, text]) => {
       const el = document.querySelector(selector);
       if (el) el.innerHTML = text;
@@ -167,7 +172,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const labelMap = {
       it: "🇮🇹 Italiano",
       en: "🇬🇧 English",
-      de: "🇩🇪 Deutsch"
+      de: "🇩🇪 Deutsch",
+      fr: "🇫🇷 Français" 
     };
     document.querySelector('.dropdown-toggle').textContent = ` ${labelMap[currentLang]}`;
   }
@@ -188,13 +194,17 @@ document.addEventListener("DOMContentLoaded", function () {
       if (tipo === "cibo") {
         sezionePrincipale = "cibo";
         menuSezioni.style.display = "flex";
+        document.getElementById("menuSezioniBevande").style.display = "none";
         filtriCibo.style.display = "block";
         activeMenu = "Antipasti";
-  
+      
       } else if (tipo === "Bevande") {
         sezionePrincipale = "bevande";
+        menuSezioni.style.display = "none"; 
+        document.getElementById("menuSezioniBevande").style.display = "flex"; 
         filtriBevande.style.display = "flex";
-        activeMenu = "Bevande";
+        activeMenu = "Bibite"; 
+      
   
       } else {
         activeMenu = tipo;
@@ -305,6 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(url)
       .then(res => res.json())
       .then(data => {
+        console.log("Sheet disponibili:", Object.keys(data)); // 👈 DEBUG
         menuData = data;
         attachFilterListeners();
         renderMenu();

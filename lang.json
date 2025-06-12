@@ -5,6 +5,7 @@
       "antipasti": "Antipasti<br>🥗",
       "primi": "Primi<br>🍝",
       "secondi": "Secondi<br>🥩",
+      "contorni": "Contorni<br>🥕",
       "dolci": "Dolci<br>🍰",
       "vegetariano": "Vegetariano",
       "vegano": "Vegano",
@@ -23,7 +24,11 @@
       "lingua": "Lingua",
       "data": "📅Data",
       "eventi": "🎉 Eventi in Programma",
-      "filtroDieta": "Filtra piatti"
+      "filtroDieta": "Filtra piatti",
+      "bibite": "Bibite",
+      "acqua": "Acqua",
+      "vino": "Vino",
+      "birra": "Birra"
     },
     "en": {
       "menu": "<i class=\"fa-solid fa-utensils\"></i>Menù",
@@ -31,6 +36,7 @@
       "antipasti": "Starters<br>🥗",
       "primi": "First Courses<br>🍝",
       "secondi": "Main Courses<br>🥩",
+      "contorni": "Side dishes<br>🥕",
       "dolci": "Desserts<br>🍰",
       "vegetariano": "Vegetarian",
       "vegano": "Vegan",
@@ -49,7 +55,12 @@
       "lingua": "Language",
       "data": "📅Date",
       "eventi": "🎉 Scheduled Events",
-      "filtroDieta": "Filter dishes"
+      "filtroDieta": "Filter dishes",
+      "bibite": "Soft drinks",
+      "acqua": "Water",
+      "vino": "Wine",
+      "birra": "Beer"
+
     },
     "de": {
       "menu": "<i class=\"fa-solid fa-utensils\"></i>Menü",
@@ -57,6 +68,7 @@
       "antipasti": "Vorspeisen<br>🥗",
       "primi": "Erste Gänge<br>🍝",
       "secondi": "Hauptgerichte<br>🥩",
+      "contorni": "Beilagen<br>🥕",
       "dolci": "Desserts<br>🍰",
       "vegetariano": "Vegetarisch",
       "vegano": "Vegan",
@@ -75,7 +87,43 @@
       "lingua": "Sprache",
       "data": "📅Datum",
       "eventi": "🎉 Geplante Veranstaltungen",
-      "filtroDieta": "Filterschalen"
-    }
+      "filtroDieta": "Filterschalen",
+      "bibite": "Soft drinks",
+      "acqua": "Wasser",
+      "vino": "Wein",
+      "birra": "Bier"
+    },
+    "fr": {
+  "menu": "<i class=\"fa-solid fa-utensils\"></i>Menu",
+  "bevande": "<i class=\"fa-solid fa-wine-glass-alt\"></i>Boissons",
+  "antipasti": "Entrées<br>🥗",
+  "primi": "Plats Principaux<br>🍝",
+  "secondi": "Plats de Résistance<br>🥩",
+  "contorni": "Accompagnements<br>🥗",
+  "dolci": "Desserts<br>🍰",
+  "vegetariano": "Végétarien",
+  "vegano": "Vegan",
+  "glutenfree": "Sans Gluten",
+  "piccante": "Épicé",
+  "lattosiofree": "Sans Lactose",
+  "alcolico": "Alcoolisé",
+  "analcolico": "Non Alcoolisé",
+  "reset": "Réinitialiser",
+  "prezzo": "Prix",
+  "ingredienti": "Ingrédients",
+  "noMatch": "😕 Aucun plat ne correspond aux filtres actifs.<br> Essayez de supprimer un ou plusieurs filtres pour voir plus de plats.",
+  "noDati": "⬆️ Sélectionnez l’une des catégories ci-dessus",
+  "benvenuto": "Bienvenue !",
+  "scopriMenu": "Découvrez notre menu digital",
+  "lingua": "Langue",
+  "data": "📅Date",
+  "eventi": "🎉 Événements à venir",
+  "filtroDieta": "Filtrer les plats",
+  "bibite": "Boire",
+  "acqua": "Eau",
+  "vino": "Du vin",
+  "birra": "Bière"
+}
+
   }
   

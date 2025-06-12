@@ -24,6 +24,7 @@
       <li><button class="dropdown-item" data-lang="it">🇮🇹 Italiano</button></li>
       <li><button class="dropdown-item" data-lang="en">🇬🇧 English</button></li>
       <li><button class="dropdown-item" data-lang="de">🇩🇪 Deutsch</button></li>
+      <li><button class="dropdown-item" data-lang="fr">🇫🇷 Français</button></li>
     </ul>
   </div>
   
@@ -49,12 +50,29 @@
       <button class="menu-switch mx-1 w-50" data-menu="Primi"></button>
     </div>
 
-    <div class="w-100 d-flex">
+    <div class="w-100 d-flex mb-2">
       <button class="menu-switch mx-1 w-50" data-menu="Secondi"></button>
-      <button class="menu-switch mx-1 w-50" data-menu="Dolci"></button>
+      <button class="menu-switch mx-1 w-50" data-menu="Contorni"></button>
     </div>
-
+    
+    <div class="w-100 d-flex">
+      <button class="menu-switch mx-1 w-50" data-menu="Dolci"></button>
+      <div class="mx-1 w-50"></div>
+    </div>
   </div>
+
+  <!-- Sezioni Bevande -->
+<div id="menuSezioniBevande" style="display: none; flex-wrap: wrap;" class="text-center mb-3 justify-content-center">
+  <div class="w-100 d-flex mb-2">
+    <button class="menu-switch mx-1 w-50" data-menu="Bibite"></button>
+    <button class="menu-switch mx-1 w-50" data-menu="Acqua"></button>
+  </div>
+  <div class="w-100 d-flex">
+    <button class="menu-switch mx-1 w-50" data-menu="Vino"></button>
+    <button class="menu-switch mx-1 w-50" data-menu="Birra"></button>
+  </div>
+</div>
+
 
   <!-- <div id="filtri-cibo" style="display: none;" class="text-center mb-3 flex-wrap ">
     <button data-filter="glutenfree" class="btn btn mx-1 mb-1" style="background-color: darkkhaki">🌾 Senza Glutine</button>
@@ -168,7 +186,7 @@
  
   </div>
 
-  <div id="menu-container" class="row d-flex flex-column"></div>
+  <div id="menu-container"></div>
 
 </main>
 

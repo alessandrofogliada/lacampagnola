@@ -1,7 +1,7 @@
 
 /* VARIABILI GLOBALI */
 :root {
-  --primary: #dc2743;
+  --primary: #C21F1E;
   --accent: #ffb4c1;
   --bg-light: #f3f3f3;
   --bg-dark: #1e1e2f;
@@ -102,6 +102,11 @@ header {
   opacity: 0.8;
 }
 
+#menu-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* CONSIGLI DELLO CHEF */
 
 #eventi {
@@ -168,6 +173,12 @@ button:active {
 .bottom-nav.show {
   transform: translateY(0%);
   opacity: 1;
+}
+
+.dropdown-toggle{
+  background-color:#C21F1E; 
+  border: 2px solid white;
+  color: white;
 }
 
 
@@ -388,6 +399,7 @@ i{
   opacity: 0;
   transform: translateY(10px);
   animation: fadeInUp 0.4s ease forwards;
+  width: 30%;
 }
 
 @keyframes fadeInUp {
