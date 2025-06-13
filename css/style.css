@@ -34,6 +34,28 @@ header {
   color: white;
 }
 
+/* Badge allergeni  */
+
+.badge {
+  color: white;
+}
+
+.allergene-glutine { background-color: #a0522d; }
+.allergene-crostacei { background-color: #ff7f50; }
+.allergene-uova { background-color: #f0ad4e; }
+.allergene-pesce { background-color: #4682b4; }
+.allergene-arachidi { background-color: #8b0000; }
+.allergene-soia { background-color: #8fbc8f; }
+.allergene-latte { background-color: #87ceeb; }
+.allergene-frutta { background-color: #daa520; }
+.allergene-sedano { background-color: #556b2f; }
+.allergene-senape { background-color: #ffd700; }
+.allergene-sesamo { background-color: #d2b48c; }
+.allergene-solfiti { background-color: #708090; }
+.allergene-lupini { background-color: #9932cc; }
+.allergene-molluschi { background-color: #40e0d0; }
+
+
 /* SCHERMATA DI BENVENUTO */
 #home-screen {
   height: 100%;
@@ -109,7 +131,7 @@ header {
 
 /* CONSIGLI DELLO CHEF */
 
-#eventi {
+/* #eventi {
   background: #fff4f6;
   padding: 2rem 1rem;
   border-radius: 20px;
@@ -133,7 +155,7 @@ header {
 
 .menu-item:hover {
   transform: scale(1.03);
-}
+} */
 
 
 
@@ -163,11 +185,13 @@ button:active {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
-  transform: translateY(100%);
-  opacity: 0;
-  transition: all 0.3s ease;
-  /* gli altri stili li mantieni */
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background-color: #f3f3f3;
+  border-top: 1px solid #ddd;
 }
 
 .bottom-nav.show {
@@ -296,6 +320,26 @@ button:active {
   border-radius: 50%;
   padding: 10px;
 }
+
+/* TABELLA ALLERGENI */
+
+#tabella-allergeni {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+#tabella-allergeni table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tabella-allergeni th, #tabella-allergeni td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
 
 /* BOTTOM NAVBAR */
 .bottom-nav {

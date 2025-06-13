@@ -16,49 +16,143 @@ document.addEventListener("DOMContentLoaded", function () {
   let langData = {};
   let menuData = {};
   let loaderTimeout;
+
+  const allergeniMap = {
+    glutine: {
+      it: "🌾 Glutine",
+      en: "🌾 Gluten",
+      de: "🌾 Gluten",
+      fr: "🌾 Gluten"
+    },
+    crostacei: {
+      it: "🦐 Crostacei",
+      en: "🦐 Crustaceans",
+      de: "🦐 Krebstiere",
+      fr: "🦐 Crustacés"
+    },
+    uova: {
+      it: "🥚 Uova",
+      en: "🥚 Eggs",
+      de: "🥚 Eier",
+      fr: "🥚 Œufs"
+    },
+    pesce: {
+      it: "🐟 Pesce",
+      en: "🐟 Fish",
+      de: "🐟 Fisch",
+      fr: "🐟 Poisson"
+    },
+    arachidi: {
+      it: "🥜 Arachidi",
+      en: "🥜 Peanuts",
+      de: "🥜 Erdnüsse",
+      fr: "🥜 Arachides"
+    },
+    soia: {
+      it: "🌱 Soia",
+      en: "🌱 Soy",
+      de: "🌱 Soja",
+      fr: "🌱 Soja"
+    },
+    latte: {
+      it: "🥛 Latte",
+      en: "🥛 Milk",
+      de: "🥛 Milch",
+      fr: "🥛 Lait"
+    },
+    frutta: {
+      it: "🌰 Frutta a guscio",
+      en: "🌰 Tree nuts",
+      de: "🌰 Schalenfrüchte",
+      fr: "🌰 Fruits à coque"
+    },
+    sedano: {
+      it: "🥬 Sedano",
+      en: "🥬 Celery",
+      de: "🥬 Sellerie",
+      fr: "🥬 Céleri"
+    },
+    senape: {
+      it: "🌿 Senape",
+      en: "🌿 Mustard",
+      de: "🌿 Senf",
+      fr: "🌿 Moutarde"
+    },
+    sesamo: {
+      it: "⚪ Sesamo",
+      en: "⚪ Sesame",
+      de: "⚪ Sesam",
+      fr: "⚪ Sésame"
+    },
+    solfiti: {
+      it: "🧪 Solfiti",
+      en: "🧪 Sulphites",
+      de: "🧪 Sulfite",
+      fr: "🧪 Sulfites"
+    },
+    lupini: {
+      it: "🌾 Lupini",
+      en: "🌾 Lupin",
+      de: "🌾 Lupinen",
+      fr: "🌾 Lupin"
+    },
+    molluschi: {
+      it: "🐚 Molluschi",
+      en: "🐚 Molluscs",
+      de: "🐚 Weichtiere",
+      fr: "🐚 Mollusques"
+    }
+  };
+
+  function renderTabellaAllergeni() {
+    const titolo = document.getElementById("allergeni-titolo");
+    const thSimbolo = document.getElementById("th-simbolo");
+    const thNome = document.getElementById("th-nome");
+    const thDescrizione = document.getElementById("th-descrizione");
+    const tbody = document.getElementById("allergeni-body");
+  
+    titolo.textContent = langData[lang].allergeni;
+    thSimbolo.textContent = langData[lang].simbolo;
+    thNome.textContent = langData[lang].nome;
+    thDescrizione.textContent = langData[lang].descrizione;
+  
+    tbody.innerHTML = "";
+  
+    for (const key in allergeniMap) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${allergeniMap[key][lang].split(" ")[0]}</td>
+        <td>${allergeniMap[key][lang]}</td>
+        <td>${langData[lang].dettagliAllergeni?.[key] || ""}</td>
+      `;
+      tbody.appendChild(row);
+    }
+  }
+  
+  document.getElementById("btn-lang-toggle").addEventListener("click", () => {
+    const tabella = document.getElementById("tabella-allergeni");
+    const menu = document.getElementById("menu-container");
+  
+    // Mostra sempre la tabella, indipendentemente dallo stato attuale
+    tabella.style.display = "block";
+    menu.style.display = "none";
+    renderTabellaAllergeni();
+  });
+  
+  
   
   menuContainer.classList.remove("fade-in");
   void menuContainer.offsetWidth; // forza il reflow
   menuContainer.classList.add("fade-in");
   
 
-  // Filtri attivi per categorie
-  let filters = {
-    vegetariano: false,
-    vegano: false,
-    glutenfree: false,
-    piccante: false,
-    lattosiofree: false,
-    alcolico: false,
-    analcolico: false
-  };
-
   updateLangLabel();
 
 
   // URL per recuperare i dati dal foglio Google Sheets
   const sheetUrls = {
-    menu: 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhYV5Lre2RdYx97zG3_aPf4HzIBzNwcbr_2F_zu6P-vUzKog5Jai02HAzVZVLNBCcW7WX3hO8lEbXjBHmNEQzJ05dwcMcJH2ljyupvNAmjOk9WgQXdYouInHksZb-MUnlAoqxPBxd7VsaMKhKfnHpJBlwi-87zzDJCN2q8gB84Vb7RpSS1ReqwpAubamP7_G8o8okwZ4TZhgJXdbkQWYExjadKBSJhegOrj7L-aEghYtDSW6sfx1hiNch6P-gzEfOwhrTJ4gKASLUKztfSylSUCjRV39w&lib=MoyGcHZ7QfCaNWTkzEmMQPD3FZZAEnAtP',
+    menu: 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLizRIETsMFlW5NffFSoxi4vHuHGjHDIZWRn3jWpd1WjhZNVLX7HPS5vLBviTZnkmv8iveDeN5nb6l9UeoQmsrTkuWI7SNyXgWSxS3YCuN940-LTBPYH6Fx-cwUVcmDDQQWTXfikeHSEY1zkbfI48Ay69H0Z2rdh6tawys9Min8f7t4S8UX4RzxAiwQ7RLJFeuUE_fIsFaDJWy_i0Ol-DQU3QE4cFxbtbFlrpKcVOFiHB6D50Djs8rWin_YJ_7FsGRpSgrfl-vATfVXKrPYGv6LhQmCk-w&lib=MoyGcHZ7QfCaNWTkzEmMQPD3FZZAEnAtP'
   };
-
-  let lastScrollTop = 0;
-  const bottomNav = document.querySelector(".bottom-nav");
-  
-  window.addEventListener("scroll", function () {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  
-    if (scrollTop > lastScrollTop) {
-      // Scroll down
-      bottomNav.classList.add("show");
-    } else {
-      // Scroll up
-      bottomNav.classList.remove("show");
-    }
-  
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-  });
-  
-
   
 
   document.querySelectorAll(".menu-card").forEach(card => {
@@ -82,7 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
       langData = data;
       translateUI();
       enableButtons();
-      fetchEventi();
     });
 
   // 🔓 Sblocca i pulsanti di menu dopo che la lingua è caricata
@@ -96,11 +189,17 @@ document.addEventListener("DOMContentLoaded", function () {
       lang = btn.dataset.lang;
       localStorage.setItem("lang", lang);
       translateUI();
-      renderMenu();
       updateLangLabel();
-      fetchEventi();
+  
+      const tabella = document.getElementById("tabella-allergeni");
+      if (tabella.style.display === "block") {
+        renderTabellaAllergeni(); // se siamo nella tabella, aggiorniamo solo quella
+      } else {
+        renderMenu(); // altrimenti, aggiorniamo il menu
+      }
     });
   });
+  
 
   // 🔄 Traduce tutti i testi visibili
   function translateUI() {
@@ -113,8 +212,8 @@ document.addEventListener("DOMContentLoaded", function () {
       el.innerHTML = langData[lang].menu;
     });    
 
-    document.querySelectorAll('[data-menu="lingua"]').forEach(el => {
-      el.textContent = langData[lang].lingua;
+    document.querySelectorAll('[data-menu="allergeni"]').forEach(el => {
+      el.textContent = langData[lang].allergeni;
     });
   
     [
@@ -131,40 +230,13 @@ document.addEventListener("DOMContentLoaded", function () {
       ["[data-menu='Acqua']", langData[lang].acqua],
       ["[data-menu='Vino']", langData[lang].vino],
       ["[data-menu='Birra']", langData[lang].birra],
+      ["[data-menu='loading']", langData[lang].loading],
 
     ].forEach(([selector, text]) => {
       const el = document.querySelector(selector);
       if (el) el.innerHTML = text;
     });
-    
 
-
-    // 🥗 Traduzione dei filtri CIBO
-    const ciboFilters = {
-      glutenfree: "🌾 " + langData[lang].glutenfree,
-      lattosiofree: "🥛 " + langData[lang].lattosiofree,
-      vegetariano: "🥦 " + langData[lang].vegetariano,
-      vegano: "🥕 " + langData[lang].vegano,
-      piccante: "🌶️ " + langData[lang].piccante,
-      reset: "🔁 " + langData[lang].reset
-    };
-
-    Object.entries(ciboFilters).forEach(([key, label]) => {
-      const btn = document.querySelector(`#filtri-cibo button[data-filter="${key}"]`);
-      if (btn) btn.textContent = label;
-    });
-
-    // 🍷 Traduzione dei filtri BEVANDE
-    const bevandeFilters = {
-      alcolico: "🍷 " + langData[lang].alcolico,
-      analcolico: "🥤 " + langData[lang].analcolico,
-      reset: "🔁 " + langData[lang].reset
-    };
-
-    Object.entries(bevandeFilters).forEach(([key, label]) => {
-      const btn = document.querySelector(`#filtri-bevande button[data-filter="${key}"]`);
-      if (btn) btn.textContent = label;
-    });
   }
 
   function updateLangLabel() {
@@ -183,123 +255,44 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", () => {
       const tipo = btn.dataset.menu;
   
-      // Nascondi tutto all'inizio
-      filtriCibo.style.display = "none";
-      filtriBevande.style.display = "none";
-  
-      if (btn.dataset.menu === "cibo" || btn.dataset.menu === "Bevande") {
-        menuSezioni.style.display = "none";
-      }
+      menuSezioni.style.display = "none";
+      document.getElementById("menuSezioniBevande").style.display = "none";
   
       if (tipo === "cibo") {
         sezionePrincipale = "cibo";
         menuSezioni.style.display = "flex";
-        document.getElementById("menuSezioniBevande").style.display = "none";
-        filtriCibo.style.display = "block";
         activeMenu = "Antipasti";
-      
       } else if (tipo === "Bevande") {
         sezionePrincipale = "bevande";
-        menuSezioni.style.display = "none"; 
-        document.getElementById("menuSezioniBevande").style.display = "flex"; 
-        filtriBevande.style.display = "flex";
-        activeMenu = "Bibite"; 
-      
-  
+        document.getElementById("menuSezioniBevande").style.display = "flex";
+        activeMenu = "Bibite";
       } else {
         activeMenu = tipo;
   
+        // 👉 Mantieni visibile la giusta sezione
         if (sezionePrincipale === "cibo") {
-          filtriCibo.style.display = "block";
-        } else {
-          filtriCibo.style.display = "none";
+          menuSezioni.style.display = "flex";
+          document.getElementById("menuSezioniBevande").style.display = "none";
+        } else if (sezionePrincipale === "bevande") {
+          menuSezioni.style.display = "none";
+          document.getElementById("menuSezioniBevande").style.display = "flex";
         }
       }
   
-      // ✅ Scroll verso l'alto dopo aver impostato la sezione
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
   
       if (!datiCaricatiMenu) {
         datiCaricatiMenu = true;
-        showLoader();         
+        showLoader();
         fetchMenu();
       } else {
-        showLoader();  
+        showLoader();
         renderMenu();
       }
     });
   });
-  
-  
+    
 
-  // 🎯 Attiva/disattiva i filtri
-  function attachFilterListeners() {
-    const allFilterButtons = document.querySelectorAll("#filtri-cibo button, #filtri-bevande button");
-  
-    allFilterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const type = btn.dataset.filter;
-  
-        if (type === "reset") {
-          // 1. Reset logico dei filtri
-          for (let key in filters) {
-            filters[key] = false;
-          }
-  
-          // 2. Reset visivo dei bottoni
-          document.querySelectorAll('.filter-chip').forEach(chip => {
-            chip.classList.remove('active');
-          });
-  
-        } else {
-          // Toggle logico
-          filters[type] = !filters[type];
-  
-          // Toggle visivo (aggiunge o rimuove 'active')
-          btn.classList.toggle('active');
-          console.log(btn.classList); 
-
-        }
-  
-        renderMenu(); // Aggiorna la lista dei piatti
-        updateActiveFiltersUI();
-      });
-    });
-  }
-
-  function updateActiveFiltersUI() {
-    const activeList = document.getElementById("active-filter-list");
-    const wrapper = document.getElementById("active-filters");
-    activeList.innerHTML = "";
-  
-    const labels = {
-      vegetariano: "🥦 " + langData[lang].vegetariano,
-      vegano: "🥕 " + langData[lang].vegano,
-      glutenfree: "🌾 " + langData[lang].glutenfree,
-      lattosiofree: "🥛 " + langData[lang].lattosiofree,
-      piccante: "🌶️ " + langData[lang].piccante,
-      alcolico: "🍷 " + langData[lang].alcolico,
-      analcolico: "🥤 " + langData[lang].analcolico
-    };
-  
-    let count = 0;
-    Object.entries(filters).forEach(([key, attivo]) => {
-      if (attivo) {
-        const badge = document.createElement("span");
-        badge.className = "badge bg-secondary";
-        badge.innerText = labels[key];
-        activeList.appendChild(badge);
-        count++;
-      }
-    });
-  
-    wrapper.style.display = count > 0 ? "block" : "none";
-  }
-  
-  
 
   // 📥 Recupera il menu dal Google Sheet
   function fetchMenu() {
@@ -317,7 +310,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(data => {
         console.log("Sheet disponibili:", Object.keys(data)); // 👈 DEBUG
         menuData = data;
-        attachFilterListeners();
         renderMenu();
       })
       .catch(err => {
@@ -332,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 🖼️ Visualizza i piatti/elementi filtrati e tradotti
   function renderMenu() {
     menuContainer.innerHTML = "";
-
+  
     if (!menuData[activeMenu]) {
       console.warn(`❌ Nessun dato disponibile per la sezione: "${activeMenu}"`);
       menuContainer.innerHTML = `<p class="text-center mt-3">${langData[lang].noDati || "Nessun dato disponibile."}</p>`;
@@ -340,143 +332,92 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
   
-    const filtered = menuData[activeMenu].filter(item => {
-      let ok = true;
-
-      if (sezionePrincipale === "cibo") {
-        ["vegetariano", "vegano", "glutenfree", "piccante", "lattosiofree"].forEach(key => {
-          if (filters[key] && (!item["Categoria"] || !item["Categoria"].toLowerCase().includes(key))) {
-            ok = false;
-          }
-        });
-      }
-
-      if (sezionePrincipale === "bevande") {
-        if (filters.alcolico && (!item["Categoria"] || item["Categoria"].toLowerCase() !== "alcolico")) ok = false;
-        if (filters.analcolico && (!item["Categoria"] || item["Categoria"].toLowerCase() !== "analcolico")) ok = false;
-      }
-
-      return ok;
-    });
-
+    const filtered = menuData[activeMenu].filter(item => true); // Nessun filtro attivo al momento
+  
     if (filtered.length === 0) {
       menuContainer.innerHTML = `
         <div class="text-center mt-4" style="background-color:white; border-radius:15px">
-        <p>${langData[lang].noMatch}</p>
-
+          <p>${langData[lang].noMatch}</p>
         </div>
       `;
       hideLoader();
       return;
     }
-    
-
-    filtered.forEach(item => {
+  
+    const renderItem = (item) => {
       const div = document.createElement("div");
       div.className = "menu-item col-md-4 mb-4";
-    
-      // Badge dinamici
-      const categorie = (item["Categoria"] || "").toLowerCase().split(",").map(c => c.trim());
-      const badgeMap = {
-        vegetariano: { label: langData[lang].vegetariano || "Vegetariano", class: "bg-warning" },
-        vegano: { label: langData[lang].vegano || "Vegano", class: "bg-success" },
-        glutenfree: { label: langData[lang].glutenfree || "Senza Glutine", class: "glutenfree" },
-        lattosiofree: { label: langData[lang].lattosiofree || "Senza Lattosio", class: "bg-primary" },
-        piccante: { label: langData[lang].piccante || "Piccante", class: "bg-danger" },
-        alcolico: { label: langData[lang].alcolico || "Alcolico", class: "bg-danger" },
-        analcolico: { label: langData[lang].analcolico || "Analcolico", class: "bg-primary" }
-      };
-    
-      let badgeHTML = "";
-    
-      Object.keys(badgeMap).forEach(key => {
-        if (categorie.includes(key)) {
-          badgeHTML += `<span class="badge ${badgeMap[key].class} me-1">${badgeMap[key].label}</span>`;
+  
+      // ✅ Parsing allergeni con normalizzazione
+      let allergeniHTML = "";
+      const allergeniRaw = item["Allergeni"] || "";
+      const allergeni = allergeniRaw
+        .split(",")
+        .map(a => a.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+  
+      allergeni.forEach(allergene => {
+        if (allergeniMap[allergene]) {
+          if (allergeniMap[allergene] && allergeniMap[allergene][lang]) {
+            allergeniHTML += `<span class="badge me-1 allergene-${allergene}">${allergeniMap[allergene][lang]}</span>`;
+          }
         }
       });
-      
-
+  
       div.innerHTML = `
         <div class="card h-100 align-items-center">
           ${item["Immagine"] ? `<img src="img/${item["Immagine"]}" class="card-img-top w-50 mt-3" alt="${item["Nome piatto"]}" loading="lazy">` : ""}
-            <div class="card-body d-flex flex-column align-items-center">
-              <h5 class="card-title" style="font-weight:bold">${item[`Nome piatto (${lang})`] || item["Nome piatto"]}</h5>
-              <div class="mb-2">${badgeHTML}</div>
-              <p class="card-text text-center"><strong>${langData[lang].ingredienti}:</strong> ${item[`Ingredienti (${lang})`] || item["Ingredienti"]}</p>
-              <p class="card-text"><strong>${langData[lang].prezzo}:</strong> €${item["Prezzo"]}</p>
+          <div class="card-body d-flex flex-column align-items-center">
+            <h5 class="card-title" style="font-weight:bold">${item[`Nome piatto (${lang})`] || item["Nome piatto"]}</h5>
+            <p class="card-text text-center">${item[`Ingredienti (${lang})`] || item["Ingredienti"]}</p>
+            ${allergeniHTML ? `<div class="mb-2">${allergeniHTML}</div>` : ""}
+            <p class="card-text"><strong>${langData[lang].prezzo}:</strong> €${item["Prezzo"]}</p>
           </div>
-
         </div>
       `;
       menuContainer.appendChild(div);
-    });
-    updateActiveFiltersUI();
-    hideLoader();
-  } 
-
+    };
   
+    if (activeMenu === "Vino" || activeMenu === "Birra") {
+      const groupedByFormat = {};
+      filtered.forEach(item => {
+        const formato = String(item.Formato || "").trim() || "Altro";
+        if (!groupedByFormat[formato]) groupedByFormat[formato] = [];
+        groupedByFormat[formato].push(item);
+      });
+  
+      const formatoOrdine = ["Calice", "0,75", "0,375", "1,5", "Birra in bottiglia", "Birra alla spina piccola", "Birra alla spina media"];
+      const sortedFormats = Object.keys(groupedByFormat).sort((a, b) => formatoOrdine.indexOf(a) - formatoOrdine.indexOf(b));
+  
+      sortedFormats.forEach(formato => {
+        const sectionTitle = document.createElement("h3");
+        sectionTitle.className = "mt-4 mb-3 w-100";
+        sectionTitle.textContent = formato;
+        menuContainer.appendChild(sectionTitle);
+  
+        groupedByFormat[formato].forEach(renderItem);
+      });
+  
+    } else {
+      filtered.forEach(renderItem);
+    }
+  
+    hideLoader();
+  }
+  
+
   menuSwitchButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+      // Disattiva visualizzazione della tabella allergeni
+      document.getElementById("tabella-allergeni").style.display = "none";
+      menuContainer.style.display = "flex";
+  
+      // Aggiorna i pulsanti attivi
       menuSwitchButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
     });
-
   });
+  
 
-  function fetchEventi() {
-    const eventiURL = sheetUrls["eventi"];
-    const container = document.getElementById("eventi-container");
-    const eventiLoader = document.getElementById("loader-eventi");
-  
-    if (!container) return;
-  
-    // MOSTRA loader
-    eventiLoader.style.display = "block";
-    container.style.display = "none";
-  
-    fetch(eventiURL)
-      .then(res => res.json())
-      .then(data => {
-        container.innerHTML = "";
-  
-        if (!data || data.length === 0) {
-          container.innerHTML = `
-            <div class="text-center my-4">
-              <p style="font-size: 18px;">📅 Nessun evento in programma al momento.</p>
-              <p>Torna a trovarci presto!</p>
-            </div>
-          `;
-        }
-         else {
-          data.forEach(evento => {
-            const div = document.createElement("div");
-            const dataObj = new Date(evento.Data);
-            const dataFormattata = dataObj.toLocaleDateString("it-IT");
-  
-            div.innerHTML = `
-              <div class="card shadow h-100 text-center">
-              ${evento.Immagine ? `<img src="img/${evento.Immagine}" class="card-img-top" alt="${evento.Titolo || "Evento"}">` : ""}
-                <div class="card-body">
-                  <h5 class="card-title">${evento.Titolo || "Evento"}</h5>
-                  <p class="card-text mb-1"><strong> ${langData[lang].data}:</strong> ${dataFormattata}</p>
-                </div>
-              </div>
-            `;
-            container.appendChild(div);
-          });
-        }
-  
-        // NASCONDI loader
-        eventiLoader.style.display = "none";
-        container.style.display = "flex";
-      })
-      .catch(err => {
-        console.error("Errore nel caricamento eventi:", err);
-        container.innerHTML = "<p>Errore nel caricamento eventi.</p>";
-        eventiLoader.style.display = "none";
-        container.style.display = "block";
-      });
-  }
   
   function showLoader() {
     loader.style.display = "flex";
