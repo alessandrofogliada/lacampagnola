@@ -365,7 +365,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
       div.innerHTML = `
         <div class="card h-100 align-items-center">
-          ${item["Immagine"] ? `<img src="img/${item["Immagine"]}" class="card-img-top w-50 mt-3" alt="${item["Nome piatto"]}" loading="lazy">` : ""}
+          ${item["Immagine"] ? `<img src="${item["Immagine"].startsWith('http') ? item["Immagine"] : `img/${item["Immagine"]}`}" 
+              class="card-img-top mt-3" 
+              alt="${item["Nome piatto"]}" 
+              loading="lazy">
+          ` : ""}
           <div class="card-body d-flex flex-column align-items-center">
             <h5 class="card-title" style="font-weight:bold">${item[`Nome piatto (${lang})`] || item["Nome piatto"]}</h5>
             <p class="card-text text-center">${item[`Ingredienti (${lang})`] || item["Ingredienti"]}</p>

@@ -20,7 +20,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: var(--bg-light);
-  background-image:url(https://ibb.co/mrZ1FX0f);
+  background-image:url(https://raw.githubusercontent.com/alessandrofogliada/lacampagnola/refs/heads/main/img/background.webp);
   color: var(--text);
 }
 
