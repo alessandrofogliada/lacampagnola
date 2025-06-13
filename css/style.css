@@ -3,7 +3,7 @@
 :root {
   --primary: #C21F1E;
   --accent: #ffb4c1;
-  --bg-light: #f3f3f3;
+  --bg-light: ##e8e8e8;
   --bg-dark: #1e1e2f;
   --text: #222;
   --border: #ddd;
@@ -20,17 +20,17 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: var(--bg-light);
-  background-image: url(/img/background2.webp);
+  background-image:url(https://ibb.co/mrZ1FX0f);
   color: var(--text);
 }
 
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 1rem;
-  background-color: var(--primary);
+  background-color: #e8e8e8;
   color: white;
 }
 
@@ -64,7 +64,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(135deg, #dc2742b4, #ff758c);
+  background: #c21f1ecc;
   color: white;
   
 }
