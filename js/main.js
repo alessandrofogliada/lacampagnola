@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     const renderItem = (item) => {
       const div = document.createElement("div");
-      div.className = "menu-item col-md-4 mb-4";
+      div.className = "menu-item";
   
       // ✅ Parsing allergeni con normalizzazione
       let allergeniHTML = "";
