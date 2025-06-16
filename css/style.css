@@ -130,33 +130,18 @@ header {
   padding-bottom: 100px;
 }
 
-/* CONSIGLI DELLO CHEF */
-
-/* #eventi {
-  background: #fff4f6;
-  padding: 2rem 1rem;
-  border-radius: 20px;
+.logo{
+  width: 15%;
+  background-color: #e8e8e8;
+  border-radius: 15px;
 }
 
-.section-title {
-  font-size: 1.5rem;
-  color: #dc2743;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
+.contatti{
+  margin: 2rem 0 2rem;
+  background-color: #fff4f6;
+  border-radius: 15px;
+  color: var(--primary);
 }
-
-.menu-item {
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  padding: 1rem;
-  margin-bottom: 1rem;
-  transition: transform 0.2s ease;
-}
-
-.menu-item:hover {
-  transform: scale(1.03);
-} */
 
 
 
@@ -588,5 +573,9 @@ i{
   nav button {
     font-size: 14px;
     padding: 0.4rem 0.8rem;
+  }
+
+  .logo{
+    width: 40%;
   }
 }
